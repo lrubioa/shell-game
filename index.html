@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shell game v2</title>
+
+    <style>
+        #main-container{
+            display: flex;
+            justify-content: center;
+            filter: blur(10px); 
+        }
+
+        #cup1, #cup2, #cup3{
+            scale: .5;
+        }
+
+        #golf-container{
+            display: flex;
+            justify-content: center;   
+        }
+
+        #golf-ball1, #golf-ball2, #golf-ball3{
+            margin: -720px;
+            margin-top: -820px;
+            
+            z-index: -1;
+        }
+
+        #ball1, #ball2, #ball3{
+            scale: .15;
+            visibility: hidden;
+
+            z-index: -1;
+        }
+
+        #btn-container1{
+            display: flex;
+            justify-content: center;
+            margin-top: -450px;
+        }
+
+        #play-btn{
+            font-size: 150px;
+            border-radius: 15px;
+            padding: 10px;
+            z-index: 3;
+        } 
+
+        #btn-container2{
+            display: flex;
+            justify-content: center;
+        }
+
+        #start-btn{
+            font-size: 40px;
+            border-radius: 4px;
+            margin-left: 10px;
+            margin-top: 455px;
+            z-index: 2;
+        }
+
+        #choice1, #choice2, #choice3{
+            border: 4px solid white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-container">
+        <div id="cup-container1">
+            <button id="choice1"> 
+            <img id="cup1" src="./images/cup-v2.png" alt="Red solo cup 1">
+            </button>
+        </div>
+        
+        <div id="cup-container2">
+            <button id="choice2"> 
+            <img id="cup2" src="./images/cup-v2.png" alt="Red solo cup 2">
+            </button>
+        </div>
+
+        <div id="cup-container3">
+            <button id="choice3"> 
+            <img id="cup3" src="./images/cup-v2.png" alt="Red solo cup 3">
+            </button>
+        </div>
+    </div>
+
+    <div id="golf-container">
+        <div id="golf-ball1">
+            <img id="ball1" src="./images/golf-ball.png" alt="Golf ball">
+        </div>
+
+        <div id="golf-ball2">
+            <img id="ball2" src="./images/golf-ball.png" alt="Golf ball">
+        </div>
+
+        <div id="golf-ball3">
+            <img id="ball3" src="./images/golf-ball.png" alt="Golf ball">
+        </div>
+    </div>
+
+    <div id="btn-container1">
+        <button id="play-btn">Play</button>
+    </div>
+
+    <div id="btn-container2">
+        <button id="start-btn" style="display: none;">Replay?</button>
+    </div>
+    <!--  --> 
+
+    <script>
+        const playbtn = document.getElementById("play-btn");
+        playbtn.addEventListener('click', gameBegin);
+
+
+        function gameBegin (){
+            document.getElementById("play-btn").style.display = "none";
+            document.getElementById("main-container").style.filter = "blur(0px)";
+
+            
+            const randomNumber = Math.floor(Math.random() *3 +1);
+            console.log(randomNumber);
+
+            
+            if(randomNumber === 1){
+                document.getElementById("ball1").style.visibility = "visible";
+
+                document.getElementById("ball2").style.visibility = "hidden";
+                document.getElementById("ball3").style.visibility = "hidden";
+            }
+
+            else if(randomNumber === 2){
+                document.getElementById("ball2").style.visibility = "visible";
+
+                document.getElementById("ball1").style.visibility = "hidden";
+                document.getElementById("ball3").style.visibility = "hidden";
+            }
+
+            else if(randomNumber === 3){
+                document.getElementById("ball3").style.visibility = "visible";
+
+                document.getElementById("ball1").style.visibility = "hidden";
+                document.getElementById("ball2").style.visibility = "hidden";
+            }
+        
+                    
+                const choice1 = document.getElementById("choice1");
+                choice1.addEventListener('click', colorChange)
+                
+                const choice2 = document.getElementById("choice2");
+                choice2.addEventListener('click', colorChange)
+                
+                const choice3 = document.getElementById("choice3");
+                choice3.addEventListener('click', colorChange)
+
+
+                function colorChange (){
+                    if(randomNumber === 1){
+                        document.getElementById("choice1").style.backgroundColor = "green"
+                        document.getElementById("choice2").style.backgroundColor = "red"
+                        document.getElementById("choice3").style.backgroundColor = "red"
+
+                        document.getElementById("start-btn").style.display = "initial";
+                    }
+
+                    else if(randomNumber === 2){
+                        document.getElementById("choice2").style.backgroundColor = "green"
+                        document.getElementById("choice1").style.backgroundColor = "red"
+                        document.getElementById("choice3").style.backgroundColor = "red"
+
+                        document.getElementById("start-btn").style.display = "initial";
+                    }
+
+                    else if(randomNumber === 3){
+                        document.getElementById("choice3").style.backgroundColor = "green"
+                        document.getElementById("choice1").style.backgroundColor = "red"
+                        document.getElementById("choice2").style.backgroundColor = "red"
+                        
+                        document.getElementById("start-btn").style.display = "initial";
+                    }
+                }
+
+
+                    const startbtn = document.getElementById("start-btn");
+                    startbtn.addEventListener('click', theCup);
+
+                    function theCup (){
+                        const randomNumber = Math.floor(Math.random() *3 +1);
+                        console.log(randomNumber);
+                        
+                        document.getElementById("choice1").style.backgroundColor = ""
+                        document.getElementById("choice2").style.backgroundColor = ""
+                        document.getElementById("choice3").style.backgroundColor = ""
+                        document.getElementById("start-btn").style.display = "none";
+
+                        
+                        if(randomNumber === 1){
+                            document.getElementById("ball1").style.visibility = "visible";
+
+                            document.getElementById("ball2").style.visibility = "hidden";
+                            document.getElementById("ball3").style.visibility = "hidden";
+                        }
+
+                        else if(randomNumber === 2){
+                            document.getElementById("ball2").style.visibility = "visible";
+
+                            document.getElementById("ball1").style.visibility = "hidden";
+                            document.getElementById("ball3").style.visibility = "hidden";
+                        }
+
+                        else if(randomNumber === 3){
+                            document.getElementById("ball3").style.visibility = "visible";
+
+                            document.getElementById("ball1").style.visibility = "hidden";
+                            document.getElementById("ball2").style.visibility = "hidden";
+                        }
+
+                                    
+                            const choice1 = document.getElementById("choice1");
+                            choice1.addEventListener('click', colorChange)
+                            
+                            const choice2 = document.getElementById("choice2");
+                            choice2.addEventListener('click', colorChange)
+                            
+                            const choice3 = document.getElementById("choice3");
+                            choice3.addEventListener('click', colorChange)
+                            
+                            function colorChange (){
+                                if(randomNumber === 1){
+                                    document.getElementById("choice1").style.backgroundColor = "green"
+                                    document.getElementById("choice2").style.backgroundColor = "red"
+                                    document.getElementById("choice3").style.backgroundColor = "red"
+
+                                    document.getElementById("start-btn").style.display = "initial";
+                                }
+
+                                else if(randomNumber === 2){
+                                    document.getElementById("choice2").style.backgroundColor = "green"
+                                    document.getElementById("choice1").style.backgroundColor = "red"
+                                    document.getElementById("choice3").style.backgroundColor = "red"
+
+                                    document.getElementById("start-btn").style.display = "initial";
+                                }
+
+                                else if(randomNumber === 3){
+                                    document.getElementById("choice3").style.backgroundColor = "green"
+                                    document.getElementById("choice1").style.backgroundColor = "red"
+                                    document.getElementById("choice2").style.backgroundColor = "red"
+                                    
+                                    document.getElementById("start-btn").style.display = "initial";
+                                }
+                            }
+
+                            
+                    } 
+
+
+    }
+        //wanna try to remove that randomize btn, and just auto it. myb do it w the choice btn??? but idk if i can do it yet 
+        //ALSO wanna use css animation to move the ball out from under the cup
+    </script>
+</body>
+</html>
